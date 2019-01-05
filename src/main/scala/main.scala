@@ -11,6 +11,7 @@ import scalafx.scene.paint.Color._
 import scalafx.scene.paint._
 import scalafx.scene.text.Text
 import scalafx.beans.property._
+import scalafx.scene.control._
 import dice.graphics._
 import scala.math._
 import scalafx.scene.input.MouseEvent
@@ -23,7 +24,13 @@ object ScalaFXHelloWorld extends JFXApp {
 
   val actualValue = new IntegerProperty(this,"value",-1)
 
-  val dice = new DiceDrawing(nbFace,actualValue)
+  val nbDiceChooser = new ComboBox(Array.range(1,10))
+
+  val nbDice = nbDiceChooser.value
+
+  nbDice.value = 1
+
+  val dice = new DiceDrawing(nbFace,actualValue,nbDice)
 
   println(cos(90.toRadians))
 
@@ -41,8 +48,12 @@ object ScalaFXHelloWorld extends JFXApp {
             children = diceList.map(d => {new DiceButton(d,nbFace)}
             )
           },
+          new HBox {
+            padding = Insets(10,10,10,10)
+            spacing = 10
+            children = Seq(new Text("Nombre de dé"),nbDiceChooser)
+          },
           dice,
-          new DiceDraw(-1),
           new HBox {
             padding = Insets(10,10,10,10)
             children = Seq(new launchButton(dice))
@@ -53,4 +64,6 @@ object ScalaFXHelloWorld extends JFXApp {
 
   }
 }
+
+
 
