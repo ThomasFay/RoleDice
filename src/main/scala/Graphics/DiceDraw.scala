@@ -8,7 +8,7 @@ import scalafx.scene.text.Text
 import scalafx.beans.property._
 import scala.util.Random
 
-class DiceDrawing(val nbFace:IntegerProperty,val actualValue:IntegerProperty) extends StackPane{
+class DiceDrawing(val nbFace:IntegerProperty,val actualValue:IntegerProperty,val nbDice:ObjectProperty[Int]) extends StackPane{
 
   val rand = new Random(System.currentTimeMillis())
 
@@ -44,8 +44,17 @@ class DiceDrawing(val nbFace:IntegerProperty,val actualValue:IntegerProperty) ex
     }
   }
 
+  def rollAll(nbDice : Int,nbFace : Int) : Int = {
+    nbDice match {
+      case 0 => 0
+      case n => {
+        val value  = rand.nextInt(nbFace) + 1
+        value + rollAll(n - 1,nbFace)
+      }
+    }
+  }
 
-  def roll = {actualValue.value = rand.nextInt(nbFace.value) + 1}
+  def roll = {actualValue.value = rollAll(nbDice.value,nbFace.value)}
 
 }
 
