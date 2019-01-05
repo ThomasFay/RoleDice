@@ -48,7 +48,11 @@ object ScalaFXHelloWorld extends JFXApp {
             children = diceList.map(d => {new DiceButton(d,nbFace)}
             )
           },
-          nbDiceChooser,
+          new HBox {
+            padding = Insets(10,10,10,10)
+            spacing = 10
+            children = Seq(new Text("Nombre de dé"),nbDiceChooser)
+          },
           dice,
           new HBox {
             padding = Insets(10,10,10,10)
