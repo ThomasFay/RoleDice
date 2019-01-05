@@ -1,4 +1,4 @@
-package hello
+package dice
 
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
@@ -16,7 +16,7 @@ import dice.graphics._
 import scala.math._
 import scalafx.scene.input.MouseEvent
 
-object ScalaFXHelloWorld extends JFXApp {
+object ScalaFXDice extends JFXApp {
 
   val diceList = Seq(3,6,12,100)
 
@@ -24,15 +24,13 @@ object ScalaFXHelloWorld extends JFXApp {
 
   val actualValue = new IntegerProperty(this,"value",-1)
 
-  val nbDiceChooser = new ComboBox(Array.range(1,10))
+  val nbDiceChooser = new ComboBox(Array.range(1,11))
 
   val nbDice = nbDiceChooser.value
 
   nbDice.value = 1
 
   val dice = new DiceDrawing(nbFace,actualValue,nbDice)
-
-  println(cos(90.toRadians))
 
   stage = new PrimaryStage {
     //    initStyle(StageStyle.Unified)

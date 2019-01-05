@@ -23,7 +23,6 @@ class DiceDrawing(val nbFace:IntegerProperty,val actualValue:IntegerProperty,val
 
   if (nbFace.value == -1) {
     children = Seq(new Text("Choisissez un dé"))
-    println("tutu")
   }
 
   actualValue.onChange{(_,_,newValue) =>
